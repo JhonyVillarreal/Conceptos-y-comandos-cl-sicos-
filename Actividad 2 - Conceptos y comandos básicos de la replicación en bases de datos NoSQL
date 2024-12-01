@@ -1,0 +1,21 @@
+torneosReplicaSete = new ReplSetTest({name: "torneosReplica", nodes: 3});
+print("Realizado");
+torneosReplicaSete.startSet();
+torneosReplicaSete.initiate();
+
+conn = new Mongo("C0579P10N108:20000");
+testDB = conn.getDB("TorneoDeportivo");
+
+testDB.Deportistas.insert({
+    "id": "2",
+    "nombres": "Carlos",
+    "apellidos": "Pérez",
+    "cedula": "8923456",
+    "telefono": "350987654",
+    "edad": 25,  // Cambiar a número
+    "fecha_nacimiento": "12/03/1998",
+    "estatura": 1.80  // Cambiar a número
+});
+
+connSecondary = new Mongo("C0579P10N108:20000");  // Si tienes nodos secundarios, conéctate a uno de ellos.
+torneoReplicaSet.stopSet();  // Detener los nodos del replica set
